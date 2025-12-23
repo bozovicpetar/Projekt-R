@@ -1,1 +1,6 @@
-# Requirements
+pandas
+numpy
+yfinance
+scikit-learn
+matplotlib
+seaborn
