@@ -1,6 +1,10 @@
-pandas
-numpy
-yfinance
-scikit-learn
-matplotlib
-seaborn
+scikit-learn>=1.8.0
+yfinance>=1.0
+seaborn>=0.13.2
+matplotlib>=3.10.0
+pandas>=2.3.3
+numpy>=2.2.1
+joblib>=1.5.3
+fastapi>=0.128.0
+pydantic>=2.12.5
+uvicorn>=0.30.0
