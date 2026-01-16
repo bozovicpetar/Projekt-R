@@ -28,6 +28,7 @@ Ovo će:
 
 ```bash
 uvicorn main:app --reload
+python -m uvicorn main:app --reload   // ako uvicorn nije globalno instaliran
 ```
 
 API će biti dostupan na: `http://localhost:8000`
