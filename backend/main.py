@@ -97,7 +97,7 @@ def predict_stock(request: StockRequest):
     direction = "rast" if change_percent > 0 else "pad"
     explanation = (
         f"Model predviđa {direction} od {abs(change_percent):.2f}% sutra "
-        f"na temelju volumena i trenda zadnja 2 dana."
+        f"na temelju volumena i trenda zadnjih mjesec dana."
     )
 
     return {

@@ -7,8 +7,15 @@ API za predviđanje cijena dionica koristeći Linear Regression model.
 
 ## Instalacija
 
+### Backend
 ```bash
 pip install -r requirements.txt
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
 ```
 
 ## Kako pokrenuti
@@ -27,6 +34,12 @@ Ovo će:
 ### 2. Pokretanje API servera
 
 ```bash
+python main.py
+```
+
+ili
+
+```bash
 uvicorn main:app --reload
 python -m uvicorn main:app --reload   // ako uvicorn nije globalno instaliran
 ```
@@ -35,6 +48,23 @@ API će biti dostupan na: `http://localhost:8000`
 
 - Dokumentacija: `http://localhost:8000/docs`
 - Health check: `http://localhost:8000/health`
+
+### 3. Pokretanje Frontend aplikacije
+
+```bash
+cd frontend
+npm run dev
+```
+
+Frontend će biti dostupan na: `http://localhost:5173`
+
+**Dostupne komande za frontend:**
+```bash
+npm run dev       # Start development server
+npm run build     # Build za produkciju
+npm run preview   # Pregled production build-a
+npm run lint      # Provjera koda
+```
 
 ## Korištenje API-ja
 
@@ -97,6 +127,7 @@ curl -X POST "http://localhost:8000/predict" -H "Content-Type: application/json"
 - `main.py` - FastAPI aplikacija
 - `stock_model.pkl` - Spremljeni model (kreira se nakon pokretanja trainModel.py)
 - `requirements.txt` - Python dependencies
+- `frontend/` - React aplikacija sa Vite-om
 
 ## Napomene
 
