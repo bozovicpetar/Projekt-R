@@ -9,6 +9,7 @@ API za predviđanje cijena dionica koristeći Linear Regression model.
 
 ### Backend
 ```bash
+cd backend
 pip install -r requirements.txt
 ```
 
@@ -23,6 +24,7 @@ npm install
 ### 1. Treniranje modela (prvo pokreni ovo!)
 
 ```bash
+cd backend
 python trainModel.py
 ```
 
@@ -34,12 +36,14 @@ Ovo će:
 ### 2. Pokretanje API servera
 
 ```bash
+cd backend
 python main.py
 ```
 
 ili
 
 ```bash
+cd backend
 uvicorn main:app --reload
 python -m uvicorn main:app --reload   // ako uvicorn nije globalno instaliran
 ```
@@ -123,11 +127,28 @@ curl -X POST "http://localhost:8000/predict" -H "Content-Type: application/json"
 
 ## Struktura projekta
 
-- `trainModel.py` - Trenira i sprema model
-- `main.py` - FastAPI aplikacija
-- `stock_model.pkl` - Spremljeni model (kreira se nakon pokretanja trainModel.py)
-- `requirements.txt` - Python dependencies
-- `frontend/` - React aplikacija sa Vite-om
+```
+Projekt-R/
+├── backend/
+│   ├── main.py                  # FastAPI aplikacija
+│   ├── model.py                 # Model logika
+│   ├── trainModel.py            # Treniranje modela
+│   ├── stock_model.pkl          # Spremljeni model
+│   └── requirements.txt         # Python dependencies
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.js               # Glavna komponenta
+│   │   ├── App.css              # Styling
+│   │   ├── main.js              # React init
+│   │   └── index.css            # Global CSS
+│   ├── index.html               # HTML template
+│   ├── package.json             # NPM dependencies (Vite)
+│   ├── vite.config.js           # Vite konfiguracija
+│   └── .gitignore
+│
+└── README.md
+```
 
 ## Napomene
 
@@ -137,3 +158,4 @@ curl -X POST "http://localhost:8000/predict" -H "Content-Type: application/json"
 - API vraća sve podatke potrebne za frontend (cijene, metrike, graf, objašnjenje)
 - CORS je omogućen za sve domene (promijeni u produkciji!)
 - Nakon treniranja modela, ažuriraj `MODEL_R2` i `MODEL_MAPE` u `main.py` s vrijednostima iz `trainModel.py`
+- Frontend koristi Vite za brzi development i optimizovani build
