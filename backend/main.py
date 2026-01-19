@@ -35,7 +35,14 @@ MODEL_MAPE = 1.02
 class StockRequest(BaseModel):
     ticker: str
 
-@app.post("/predict")
+@app.get("/api/health")
+def health_check():
+    return {
+        "status": "healthy",
+        "model_loaded": os.path.exists(MODEL_PATH)
+    }
+
+@app.post("/api/predict")
 def predict_stock(request: StockRequest):
     ticker = request.ticker.upper()
 
@@ -114,24 +121,6 @@ def predict_stock(request: StockRequest):
         },
         "chart_data": chart_data,
         "explanation": explanation
-    }
-
-@app.get("/")
-def root():
-    return {
-        "message": "Stock Prediction API",
-        "endpoints": {
-            "POST /predict": "Predviđa cijenu dionice za sutra",
-            "GET /health": "Provjera statusa API-ja"
-        }
-    }
-
-
-@app.get("/health")
-def health_check():
-    return {
-        "status": "healthy",
-        "model_loaded": os.path.exists(MODEL_PATH)
     }
 
 # Mount static files (frontend)
