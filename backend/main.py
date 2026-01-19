@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import joblib
 import yfinance as yf
 import numpy as np
@@ -131,3 +133,17 @@ def health_check():
         "status": "healthy",
         "model_loaded": os.path.exists(MODEL_PATH)
     }
+
+# Mount static files (frontend)
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+if os.path.exists(STATIC_DIR):
+    app.mount("/assets", StaticFiles(directory=os.path.join(STATIC_DIR, "assets")), name="assets")
+    
+    @app.get("/{full_path:path}")
+    def serve_frontend(full_path: str):
+        # Serve index.html for all routes (SPA)
+        if full_path and not full_path.startswith("api"):
+            file_path = os.path.join(STATIC_DIR, full_path)
+            if os.path.exists(file_path) and os.path.isfile(file_path):
+                return FileResponse(file_path)
+        return FileResponse(os.path.join(STATIC_DIR, "index.html"))

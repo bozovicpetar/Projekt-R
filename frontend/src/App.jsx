@@ -10,7 +10,7 @@ export default function App() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
 
-  const API_URL = 'http://localhost:8000'
+  const API_URL = window.location.origin
 
   const handleAnalyze = async () => {
     if (!ticker.trim()) {
