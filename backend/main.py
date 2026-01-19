@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL_PATH = "stock_model.pkl"
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "stock_model.pkl")
 
 if not os.path.exists(MODEL_PATH):
     raise FileNotFoundError(
