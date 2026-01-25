@@ -10,7 +10,7 @@ def train_and_save_model():
     ticker = "AAPL" 
     print(f"Dohvaćanje podataka za trening ({ticker})...")
     
-    data = yf.download(ticker, start="2020-01-01", end="2025-01-01")
+    data = yf.download(ticker, start="2020-01-01", end="2026-01-01")
     
     if data is None or data.empty:
         print("Greška: Nema podataka. Provjeri internet vezu.")

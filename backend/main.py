@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 from pydantic import BaseModel
 import os
+from datetime import datetime, timedelta
 
 app = FastAPI()
 
@@ -28,8 +29,8 @@ if not os.path.exists(MODEL_PATH):
 
 model = joblib.load(MODEL_PATH)
 
-MODEL_R2 = 0.988
-MODEL_MAPE = 1.02
+MODEL_R2 = 0.9700
+MODEL_MAPE = 1.18
 
 
 class StockRequest(BaseModel):
@@ -94,8 +95,8 @@ def predict_stock(request: StockRequest):
 
     chart_data.sort(key=lambda x: x["date"])
 
-    last_date = pd.to_datetime(chart_data[-1]["date"])
-    tomorrow = (last_date + pd.Timedelta(days=1)).strftime("%Y-%m-%d")
+    # Use actual current date + 1 day for tomorrow's prediction
+    tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
 
     chart_data.append({
         "date": tomorrow,
